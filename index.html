@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ParkPilot | Parking Operations</title>
+
+    <!-- IMPORTANT: CSS is in the SAME folder -->
+    <link rel="stylesheet" href="parkpilot.css">
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                P
+            </div>
+
+            <div>
+                <h2>ParkPilot</h2>
+                <span>Parking Operations</span>
+            </div>
+
+        </div>
+
+
+        <div class="menu-title">
+            OPERATIONS
+        </div>
+
+
+        <a href="index.html"
+           class="menu active">
+
+            <span>▦</span>
+
+            Overview
+
+        </a>
+
+
+        <a href="#parking"
+           class="menu">
+
+            <span>⌗</span>
+
+            Live Parking
+
+        </a>
+
+
+        <a href="#reservations"
+           class="menu">
+
+            <span>▤</span>
+
+            Reservations
+
+        </a>
+
+
+        <a href="ticket.html"
+           class="menu">
+
+            <span>🎫</span>
+
+            Tickets
+
+        </a>
+
+
+        <a href="#entry"
+           class="menu">
+
+            <span>↔</span>
+
+            Entry / Exit
+
+        </a>
+
+
+        <div class="menu-title">
+            MANAGEMENT
+        </div>
+
+
+        <a href="#alerts"
+           class="menu">
+
+            <span>⚠</span>
+
+            Alerts
+
+            <b class="menu-count">
+                3
+            </b>
+
+        </a>
+
+
+        <a href="#billing"
+           class="menu">
+
+            <span>₹</span>
+
+            Billing
+
+        </a>
+
+
+        <a href="#analytics"
+           class="menu">
+
+            <span>▥</span>
+
+            Analytics
+
+        </a>
+
+
+        <a href="#reports"
+           class="menu">
+
+            <span>▤</span>
+
+            Reports
+
+        </a>
+
+
+        <div class="sidebar-bottom">
+
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        System Online
+                    </strong>
+
+                    <small>
+                        All services operational
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-mini">
+
+                <div class="avatar">
+                    KM
+                </div>
+
+                <div>
+
+                    <strong>
+                        Kaviya
+                    </strong>
+
+                    <small>
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <div class="breadcrumb">
+                    ParkPilot / Operations
+                </div>
+
+                <h1>
+                    Parking Operations
+                </h1>
+
+            </div>
+
+
+            <div class="top-actions">
+
+
+                <div class="search">
+
+                    🔍
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search booking, vehicle..."
+                    >
+
+                </div>
+
+
+                <button
+                    class="notification"
+                    onclick="showNotification()">
+
+                    🔔
+
+                    <span>
+                        3
+                    </span>
+
+                </button>
+
+
+                <div class="top-profile">
+
+                    <div class="avatar">
+                        KM
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Kaviya
+                        </strong>
+
+                        <small>
+                            Administrator
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </header>
+
+
+
+        <!-- SYSTEM BAR -->
+
+        <section class="system-bar">
+
+
+            <div>
+
+                <strong>
+                    Today's Operations
+                </strong>
+
+                <span id="currentDate">
+                </span>
+
+            </div>
+
+
+            <div class="system-online">
+
+                <span></span>
+
+                Live system
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <section class="stats">
+
+
+            <div class="stat-card green">
+
+                <div class="stat-icon">
+                    🅿
+                </div>
+
+                <div>
+
+                    <small>
+                        AVAILABLE
+                    </small>
+
+                    <h2 id="availableCount">
+                        48
+                    </h2>
+
+                    <p>
+                        Parking spaces
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card red">
+
+                <div class="stat-icon">
+                    🚗
+                </div>
+
+                <div>
+
+                    <small>
+                        OCCUPIED
+                    </small>
+
+                    <h2 id="occupiedCount">
+                        31
+                    </h2>
+
+                    <p>
+                        Vehicles inside
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card yellow">
+
+                <div class="stat-icon">
+                    🎫
+                </div>
+
+                <div>
+
+                    <small>
+                        RESERVED
+                    </small>
+
+                    <h2 id="reservedCount">
+                        12
+                    </h2>
+
+                    <p>
+                        Upcoming bookings
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card orange">
+
+                <div class="stat-icon">
+                    ⚠
+                </div>
+
+                <div>
+
+                    <small>
+                        ATTENTION
+                    </small>
+
+                    <h2 id="attentionCount">
+                        05
+                    </h2>
+
+                    <p>
+                        Requires action
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= MAIN GRID ================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- LIVE PARKING -->
+
+            <div class="panel"
+                 id="parking">
+
+                <div style="margin-bottom: 20px; padding: 18px; background: #121a2d; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;">
+                    <h3 style="margin-bottom: 12px;">Book a Parking Slot</h3>
+                    <form id="bookingForm" style="display: grid; gap: 12px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+                            <input type="text" id="userName" placeholder="Your name" required style="padding: 10px 12px; border-radius: 10px; border: 1px solid #2a3555; background: #0b1220; color: white;" />
+                            <input type="text" id="vehicleNumber" placeholder="Vehicle number" required style="padding: 10px 12px; border-radius: 10px; border: 1px solid #2a3555; background: #0b1220; color: white;" />
+                            <input type="text" id="slotId" placeholder="Slot ID (A01, B04)" required style="padding: 10px 12px; border-radius: 10px; border: 1px solid #2a3555; background: #0b1220; color: white;" />
+                            <input type="number" id="durationHours" min="1" max="12" value="2" placeholder="Hours" style="padding: 10px 12px; border-radius: 10px; border: 1px solid #2a3555; background: #0b1220; color: white;" />
+                        </div>
+                        <button type="submit" class="primary-btn" style="justify-self: start;">Confirm Booking</button>
+                    </form>
+                    <div id="bookingMessage" style="margin-top: 12px; color: #9fe8b0; min-height: 20px;"></div>
+                </div>
+
+                <div class="panel-header">
+
+
+                    <div>
+
+                        <h2>
+                            Live Parking
+                        </h2>
+
+                        <p>
+                            Ground floor · Real-time slot status
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="outline-button"
+                        onclick="openParking()">
+
+                        View full map →
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- LEGEND -->
+
+                <div class="parking-legend">
+
+                    <span>
+                        <i class="available-dot"></i>
+                        Available
+                    </span>
+
+                    <span>
+                        <i class="occupied-dot"></i>
+                        Occupied
+                    </span>
+
+                    <span>
+                        <i class="reserved-dot"></i>
+                        Reserved
+                    </span>
+
+                    <span>
+                        <i class="ev-dot"></i>
+                        EV
+                    </span>
+
+                </div>
+
+
+
+                <!-- PARKING MAP -->
+
+                <div class="parking-map">
+
+
+                    <div class="parking-row">
+
+
+                        <div class="slot available"
+                             onclick="slotDetails('A01','Available')">
+
+                            <strong>
+                                A01
+                            </strong>
+
+                            <small>
+                                Available
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot occupied"
+                             onclick="slotDetails('A02','Occupied')">
+
+                            <strong>
+                                A02
+                            </strong>
+
+                            <small>
+                                Occupied
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot reserved"
+                             onclick="slotDetails('A03','Reserved')">
+
+                            <strong>
+                                A03
+                            </strong>
+
+                            <small>
+                                Reserved
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot available"
+                             onclick="slotDetails('A04','Available')">
+
+                            <strong>
+                                A04
+                            </strong>
+
+                            <small>
+                                Available
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="parking-row">
+
+
+                        <div class="slot available"
+                             onclick="slotDetails('B01','Available')">
+
+                            <strong>
+                                B01
+                            </strong>
+
+                            <small>
+                                Available
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot occupied"
+                             onclick="slotDetails('B02','Occupied')">
+
+                            <strong>
+                                B02
+                            </strong>
+
+                            <small>
+                                Occupied
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot available"
+                             onclick="slotDetails('B03','Available')">
+
+                            <strong>
+                                B03
+                            </strong>
+
+                            <small>
+                                Available
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot ev"
+                             onclick="slotDetails('B04','EV')">
+
+                            <strong>
+                                B04
+                            </strong>
+
+                            <small>
+                                EV Charging
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="parking-row">
+
+
+                        <div class="slot accessible"
+                             onclick="slotDetails('C01','Accessible')">
+
+                            <strong>
+                                C01
+                            </strong>
+
+                            <small>
+                                Accessible
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot available"
+                             onclick="slotDetails('C02','Available')">
+
+                            <strong>
+                                C02
+                            </strong>
+
+                            <small>
+                                Available
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot occupied"
+                             onclick="slotDetails('C03','Occupied')">
+
+                            <strong>
+                                C03
+                            </strong>
+
+                            <small>
+                                Occupied
+                            </small>
+
+                        </div>
+
+
+                        <div class="slot available"
+                             onclick="slotDetails('C04','Available')">
+
+                            <strong>
+                                C04
+                            </strong>
+
+                            <small>
+                                Available
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ATTENTION -->
+
+            <div class="panel"
+                 id="alerts">
+
+
+                <div class="panel-header">
+
+
+                    <div>
+
+                        <h2>
+                            Attention Required
+                        </h2>
+
+                        <p>
+                            Items requiring staff action
+                        </p>
+
+                    </div>
+
+
+                    <span class="alert-number">
+                        5
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- OVERSTAY -->
+
+                <div class="attention-item danger">
+
+
+                    <div class="attention-icon">
+                        !
+                    </div>
+
+
+                    <div class="attention-content">
+
+                        <strong>
+                            OVERSTAY
+                        </strong>
+
+                        <p>
+                            TN 38 AB 1234 · Slot A02
+                        </p>
+
+                        <small>
+                            32 minutes beyond booking
+                        </small>
+
+
+                        <div class="attention-buttons">
+
+                            <button
+                                onclick="extendBooking()">
+
+                                Extend
+
+                            </button>
+
+
+                            <button
+                                class="danger-btn"
+                                onclick="resolveOverstay()">
+
+                                Resolve
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NO SHOW -->
+
+                <div class="attention-item warning">
+
+
+                    <div class="attention-icon">
+                        !
+                    </div>
+
+
+                    <div class="attention-content">
+
+                        <strong>
+                            NO-SHOW
+                        </strong>
+
+                        <p>
+                            PP-10482 · Slot A03
+                        </p>
+
+                        <small>
+                            Grace period exceeded
+                        </small>
+
+
+                        <div class="attention-buttons">
+
+
+                            <button
+                                onclick="viewTicket()">
+
+                                View Ticket
+
+                            </button>
+
+
+                            <button
+                                class="warning-btn"
+                                onclick="releaseSlot()">
+
+                                Release Slot
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ARRIVAL -->
+
+                <div class="attention-item info">
+
+
+                    <div class="attention-icon">
+                        i
+                    </div>
+
+
+                    <div class="attention-content">
+
+                        <strong>
+                            ARRIVAL SOON
+                        </strong>
+
+                        <p>
+                            PP-10483 · Slot B02
+                        </p>
+
+                        <small>
+                            Expected in 12 minutes
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= ARRIVALS ================= -->
+
+        <section class="panel"
+                 id="reservations">
+
+
+            <div class="panel-header">
+
+
+                <div>
+
+                    <h2>
+                        Today's Arrivals
+                    </h2>
+
+                    <p>
+                        Upcoming and active reservations
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="outline-button">
+
+                    View all
+
+                </button>
+
+
+            </div>
+
+
+
+            <div class="table-container">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                TICKET
+                            </th>
+
+                            <th>
+                                VEHICLE
+                            </th>
+
+                            <th>
+                                SLOT
+                            </th>
+
+                            <th>
+                                ARRIVAL
+                            </th>
+
+                            <th>
+                                END TIME
+                            </th>
+
+                            <th>
+                                STATUS
+                            </th>
+
+                            <th>
+                                ACTION
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    PP-10481
+                                </strong>
+                            </td>
+
+                            <td>
+                                TN 38 AB 1234
+                            </td>
+
+                            <td>
+                                A01
+                            </td>
+
+                            <td>
+                                10:15 AM
+                            </td>
+
+                            <td>
+                                12:15 PM
+                            </td>
+
+                            <td>
+
+                                <span class="badge active">
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="table-button">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    PP-10482
+                                </strong>
+                            </td>
+
+                            <td>
+                                TN 02 CD 5678
+                            </td>
+
+                            <td>
+                                A03
+                            </td>
+
+                            <td>
+                                10:30 AM
+                            </td>
+
+                            <td>
+                                12:30 PM
+                            </td>
+
+                            <td>
+
+                                <span class="badge no-show">
+                                    No-show
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="table-button"
+                                    onclick="viewTicket()">
+
+                                    Manage
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+
+                        <tr>
+
+                            <td>
+                                <strong>
+                                    PP-10483
+                                </strong>
+                            </td>
+
+                            <td>
+                                TN 09 EF 1234
+                            </td>
+
+                            <td>
+                                B02
+                            </td>
+
+                            <td>
+                                12:00 PM
+                            </td>
+
+                            <td>
+                                02:00 PM
+                            </td>
+
+                            <td>
+
+                                <span class="badge confirmed">
+                                    Confirmed
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="table-button">
+
+                                    View
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= BILLING & REPORTS ================= -->
+
+        <section class="panel billing-panel" id="billing">
+
+            <div class="panel-header">
+                <div>
+                    <h2>Billing &amp; Analytics</h2>
+                    <p>Booking value and activity from recorded reservations</p>
+                </div>
+
+                <div class="billing-controls">
+                    <label for="billingPeriod">Period</label>
+                    <select id="billingPeriod">
+                        <option value="7">Last 7 days</option>
+                        <option value="30" selected>Last 30 days</option>
+                        <option value="90">Last 90 days</option>
+                        <option value="all">All time</option>
+                    </select>
+                    <button class="outline-button" id="exportBillingReport" type="button">
+                        Export CSV
+                    </button>
+                </div>
+            </div>
+
+            <p class="billing-message" id="billingMessage" role="status" aria-live="polite"></p>
+
+            <div class="billing-summary" id="analytics">
+                <article class="billing-metric">
+                    <span>BOOKING VALUE</span>
+                    <strong id="billingTotal">₹0</strong>
+                </article>
+                <article class="billing-metric">
+                    <span>RESERVATIONS</span>
+                    <strong id="billingCount">0</strong>
+                </article>
+                <article class="billing-metric">
+                    <span>AVERAGE BOOKING</span>
+                    <strong id="billingAverage">₹0</strong>
+                </article>
+            </div>
+
+            <div class="billing-chart-block">
+                <h3>Daily booking value</h3>
+                <div class="billing-chart" id="billingChart" aria-label="Daily booking value chart"></div>
+            </div>
+
+            <div class="billing-report" id="reports">
+                <div class="billing-report-heading">
+                    <h3>Billing report</h3>
+                    <span id="billingReportCount">0 records</span>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BOOKING</th>
+                                <th>CUSTOMER</th>
+                                <th>SLOT</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                                <th>BOOKING VALUE</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billingRows">
+                            <tr><td colspan="6">Loading billing report...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= BOTTOM ================= -->
+
+        <section class="bottom-grid">
+
+
+            <!-- ACTIVE PARKING -->
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+
+                    <div>
+
+                        <h2>
+                            Active Parking
+                        </h2>
+
+                        <p>
+                            Vehicles currently inside
+                        </p>
+
+                    </div>
+
+
+                    <span class="live-label">
+                        ● LIVE
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="active-car">
+
+
+                    <div class="car-icon">
+                        🚗
+                    </div>
+
+
+                    <div class="car-info">
+
+                        <strong>
+                            TN 38 AB 1234
+                        </strong>
+
+                        <span>
+                            Slot A02 · Entry 10:15 AM
+                        </span>
+
+                    </div>
+
+
+                    <div class="car-time">
+
+                        <strong>
+                            11:42
+                        </strong>
+
+                        <small>
+                            minutes
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="active-car">
+
+
+                    <div class="car-icon">
+                        🚙
+                    </div>
+
+
+                    <div class="car-info">
+
+                        <strong>
+                            TN 55 XY 8899
+                        </strong>
+
+                        <span>
+                            Slot B02 · Entry 09:45 AM
+                        </span>
+
+                    </div>
+
+
+                    <div class="car-time over">
+
+                        <strong>
+                            +32
+                        </strong>
+
+                        <small>
+                            overstay
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- QUICK OPERATIONS -->
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Quick Operations
+                        </h2>
+
+                        <p>
+                            Frequently used staff actions
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="quick-actions">
+
+
+                    <button
+                        onclick="createTicket()">
+
+                        <span>
+                            🎫
+                        </span>
+
+                        <strong>
+                            Create Ticket
+                        </strong>
+
+                        <small>
+                            New reservation
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        onclick="verifyEntry()">
+
+                        <span>
+                            ↗
+                        </span>
+
+                        <strong>
+                            Verify Entry
+                        </strong>
+
+                        <small>
+                            Scan booking
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        onclick="processExit()">
+
+                        <span>
+                            ↙
+                        </span>
+
+                        <strong>
+                            Process Exit
+                        </strong>
+
+                        <small>
+                            Calculate bill
+                        </small>
+
+                    </button>
+
+
+                    <button
+                        onclick="manageSlots()">
+
+                        <span>
+                            🅿
+                        </span>
+
+                        <strong>
+                            Manage Slots
+                        </strong>
+
+                        <small>
+                            Update parking
+                        </small>
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>
+                © 2026 ParkPilot
+            </span>
+
+            <span>
+                Parking Management System · v1.0
+            </span>
+
+        </footer>
+
+
+    </main>
+
+</div>
+
+
+<!-- IMPORTANT: JavaScript is in SAME folder -->
+
+<script src="dashboard.js"></script>
+
+</body>
+
+</html>
